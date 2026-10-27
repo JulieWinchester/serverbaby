@@ -1,0 +1,20 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    volumes:
+      - ./config:/config
+      - /mnt/storage_5tb:/data/storage_5tb
+      - /mnt/storage_3tb:/data/storage_3tb
+    devices:
+      - /dev/dri:/dev/dri # N100 QuickSync
+    group_add:
+      - "992" # Your render group ID
+    restart: unless-stopped
