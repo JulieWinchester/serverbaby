@@ -1,0 +1,44 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - WEBUI_PORT=8080
+    volumes:
+      - ./config:/config
+      - /mnt/storage_5tb/:/mnt/storage_5tb
+      - /mnt/storage_3tb/:/mnt/storage_3tb
+      - /mnt/storage_5tb/download:/download
+    ports:
+      - 8080:8080
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    networks:
+      - serverbaby
+
+  flood:
+    image: jesec/flood:latest
+    container_name: flood
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - ./../flood/config:/data
+      - /mnt/storage_5tb/:/mnt/storage_5tb
+      - /mnt/storage_3tb/:/mnt/storage_3tb
+      - /mnt/storage_5tb/download:/download
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    command: --port 3000
+    networks:
+      - serverbaby
+
+networks:
+  serverbaby:
+    external: true
