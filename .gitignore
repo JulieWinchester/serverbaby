@@ -1,4 +1,9 @@
 .env
+arrs/config/cross-seed
+arrs/config/prowlarr
+arrs/config/radarr
+arrs/config/sonarr
 arrs/config/trackers/*.yml
 homepage/config/logs
 homepage/config_public/logs
+plex/config
