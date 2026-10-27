@@ -7,3 +7,4 @@ arrs/config/trackers/*.yml
 homepage/config/logs
 homepage/config_public/logs
 plex/config
+portainer/data
