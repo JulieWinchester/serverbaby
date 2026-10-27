@@ -1,0 +1,62 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - "81:3000"
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Host stats mounts
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      # NFS volume mounts
+      - /mnt/storage_3tb:/storage_3tb:ro
+      - /mnt/storage_5tb:/storage_5tb:ro
+    devices:
+      - /dev/dri:/dev/dri # This is the critical N100 GPU link
+    group_add:
+      - "992"
+    env_file:
+      - .env
+    environment:
+      - HOMEPAGE_VAR_PROC=/host/proc
+      - HOMEPAGE_VAR_SYS=/host/sys
+      - HOMEPAGE_ALLOWED_HOSTS=serverbaby.local,192.168.1.239,192.168.0.239,serverbaby.tail1d92ef.ts.net:81
+    networks:
+      - serverbaby
+    restart: unless-stopped
+
+  homepage_public:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage_public
+    ports:
+      - "82:3000"
+    volumes:
+      - ./config_public:/app/config
+    env_file:
+      - .env
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=serverbaby.local:82,192.168.1.239:82,192.168.0.239:82,serverbaby.tail1d92ef.ts.net
+    networks:
+      - serverbaby
+    restart: unless-stopped
+
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    restart: unless-stopped
+    network_mode: host
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/host:ro
+    devices:
+      - /dev/dri:/dev/dri # Give Glances the GPU
+    environment:
+      - "GLANCES_OPT=-w" # Starts the web server 
+
+networks:
+  serverbaby:
+    external: true

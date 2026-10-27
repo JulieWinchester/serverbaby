@@ -1,0 +1,25 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Services:
+    - Plex:
+        icon: plex.png
+        href: http://serverbaby.tail1d92ef.ts.net:32400/web
+        description: Stream Movies and TV
+        ping: http://serverbaby.tail1d92ef.ts.net:32400 # Adds a green/red status dot
+        statusStyle: dot
+        widget:
+          type: plex
+          url: http://serverbaby.tail1d92ef.ts.net:32400
+          key: "{{HOMEPAGE_VAR_PLEX_API_KEY}}"
+    - Emulation:
+        icon: romm.png
+        description: Roms Library
+        href: http://serverbaby.tail1d92ef.ts.net:8081
+        ping: http://serverbaby.tail1d92ef.ts.net:8081
+        statusStyle: dot
+        widget:
+          type: romm
+          url: http://serverbaby.tail1d92ef.ts.net:8081
+          fields: ["platforms", "totalRoms", "saves", "states"] # optional - default fields shown

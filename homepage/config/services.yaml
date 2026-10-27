@@ -1,0 +1,97 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Media:
+    - Plex:
+        icon: plex.png
+        href: http://serverbaby.local:32400/web
+        description: ServerBaby Media
+        widget:
+          type: plex
+          url: http://192.168.0.239:32400
+          key: "{{HOMEPAGE_VAR_PLEX_API_KEY}}"
+    - Downloads:
+        icon: flood.png
+        href: http://serverbaby.local:3000 # Points to Flood
+        description: Flood Torrent Manager
+        widget:
+          type: qbittorrent
+          url: http://qbittorrent:8080
+          username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
+    - Emulation:
+        icon: romm.png
+        description: Roms Library
+        href: http://serverbaby.local:8081
+        widget:
+          type: romm
+          url: http://192.168.0.239:8081
+          fields: ["platforms", "totalRoms", "saves", "states"] # optional - default fields shown
+
+- Servarr Stack:
+    - Prowlarr:
+        icon: prowlarr.png
+        href: http://serverbaby.local:9696
+        description: Tracker Indexer
+        widget:
+          type: prowlarr
+          url: http://192.168.0.239:9696
+          key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
+    - Radarr:
+        icon: radarr.png
+        href: http://serverbaby.local:7878
+        description: Movie Discovery
+        widget:
+          type: radarr
+          url: http://192.168.0.239:7878
+          key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
+    - Sonarr:
+        icon: sonarr.png
+        href: http://serverbaby.local:8989
+        description: TV Discovery
+        widget:
+          type: sonarr
+          url: http://192.168.0.239:8989
+          key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
+
+- Infrastructure:
+    - Portainer:
+        icon: portainer.png
+        href: http://serverbaby.local:9000
+        widget:
+          type: portainer
+          url: http://192.168.0.239:9000
+          env: 3 # The ID of the environment to monitor
+          key: "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}"
+
+    - N100 GPU:
+        icon: si-intel
+        widget:
+          type: glances
+          url: http://192.168.0.239:61208
+          version: 4
+          metric: gpu:intel0
+          label: GPU
+          hide_temp: true
+          hide_memory: true
+
+    - System Drive:
+        icon: mdi-debian # Using the Debian icon for the OS drive
+        widget:
+          type: glances
+          url: http://192.168.0.239:61208
+          version: 4
+          metric: fs:/host # The host's root drive
+          label: System
+          show_expanded: true
+
+    - Network Traffic:
+        icon: mdi-wifi
+        widget:
+          type: glances
+          url: http://192.168.0.239:61208
+          version: 4
+          metric: network:wlo1 # Using your specific interface
+          label: Wi-Fi
+          chart: true

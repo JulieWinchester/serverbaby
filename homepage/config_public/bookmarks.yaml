@@ -1,0 +1,8 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Other Status Pages:
+    - Status Dashboard:
+        - abbr: SD
+          href: http://serverbaby.tail1d92ef.ts.net:81

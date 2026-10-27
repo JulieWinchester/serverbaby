@@ -1,0 +1,16 @@
+- resources:
+    cpu: true
+    memory: true
+    label: System
+
+- resources:
+    disk:
+      - /storage_3tb
+      - /storage_5tb
+    expanded: true
+    label: NAS Volumes
+
+- datetime:
+    format:
+      timeStyle: short
+      dateStyle: short

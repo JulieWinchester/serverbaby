@@ -1,0 +1,21 @@
+title: ServerBaby Dashboard
+# base: http://serverbaby.local
+headerStyle: clean
+useEqualHeights: true
+color: indigo
+
+cpu:
+  path: /host/proc/stat
+memory:
+  path: /host/proc/meminfo
+
+layout:
+  Media:
+    style: row
+    columns: 3
+  Servarr Stack:
+    style: row
+    columns: 3
+  Infrastructure:
+    style: row
+    columns: 4

@@ -1,0 +1,12 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Network Storage:
+    - FrogNAS:
+        - abbr: FN
+          href: http://frognas.local/
+    - QBittorrent:
+        - abbr: QB
+          href: http://serverbaby.local:8080
+

@@ -1,0 +1,3 @@
+On 5/5/2026, I added custom port forwarding rules to /etc/ufw/before.rules to ensure that port 80 is forwarded to port 81 (admin homepage container) on ethernet and wlan network interfaces, but routes to port 82 (public homepage container) for tailscale interfaces.
+
+A user-readable copy of /etc/ufw/before.rules with these custom port forwarding rules is located in docker/homepage.
