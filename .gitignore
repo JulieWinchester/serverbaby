@@ -1,1 +1,3 @@
 .env
+homepage/config/logs
+homepage/config_public/logs
