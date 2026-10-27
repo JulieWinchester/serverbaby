@@ -1,0 +1,80 @@
+services:
+  # Prowlarr - Indexer manager
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000 # Run 'id' in your terminal to get your UID
+      - PGID=1000 # Run 'id' in your terminal to get your GID
+      - TZ=America/Chicago
+    volumes:
+      - ~/docker/arrs/config/prowlarr:/config
+      # Mount your custom tracker YMLs here
+      - ~/docker/arrs/config/trackers:/config/Definitions/Custom:ro
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+    networks:
+      - serverbaby
+
+  # Radarr - Movie management
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - ~/docker/arrs/config/radarr:/config
+      - /mnt/storage_5tb:/mnt/storage_5tb # files downloaded to download/ and plex reads at /movie
+      - /mnt/storage_5tb/movie:/movie # Point to your movie storage, legacy (remove later)
+      - /mnt/storage_5tb/download:/download # Point to your torrent download folder, legacy (remove later)
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    networks:
+      - serverbaby
+
+  # Sonarr - TV show management
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - ~/docker/arrs/config/sonarr:/config
+      - /mnt/storage_5tb:/mnt/storage_5tb # files downloaded to download/ and plex reads at /tv
+      - /mnt/storage_5tb/tv:/tv # Point to your TV storage, legacy (remove later)
+      - /mnt/storage_5tb/download:/download # Point to your torrent download folder, legacy (remove later)
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    networks:
+      - serverbaby
+
+  # cross-seed - automatic cross-seeding between prowlarr-indexed trackers
+  cross-seed:
+    image: ghcr.io/cross-seed/cross-seed:6
+    container_name: cross-seed
+    user: 1000:1000 # Make sure 1000:1000 matches the user account that owns your media/config files
+    ports:
+      - "2468:2468"
+    volumes:
+      # Appdata configuration directory for cross-seed
+      - ~/docker/arrs/config/cross-seed:/config
+      # qBittorrent torrent state backup directory
+      - ~/docker/qbittorrent/config/qBittorrent/BT_backup:/torrents:ro
+      # Storage mounts (identical to your host/qBittorrent setup)
+      - /mnt/storage_5tb:/mnt/storage_5tb
+      - /mnt/storage_3tb:/mnt/storage_3tb
+    command: daemon
+    restart: unless-stopped
+    networks:
+      - serverbaby
+
+networks:
+  serverbaby:
+    external: true
