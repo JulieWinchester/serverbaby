@@ -1,0 +1,143 @@
+emulatorjs:
+  cache_limit: null
+  controls: {}
+  debug: false
+  disable_auto_unload: false
+  disable_batch_bootup: false
+  netplay:
+    enabled: false
+    ice_servers: []
+  settings: {}
+exclude:
+  platforms:
+  - $RECYCLE.BIN
+  - .DocumentRevisions-V100
+  - .Spotlight-V100
+  - .Trash-*
+  - .fseventsd
+  - .stfolder
+  - '@eaDir'
+  - System Volume Information
+  - __MACOSX
+  roms:
+    multi_file:
+      names:
+      - $RECYCLE.BIN
+      - .DocumentRevisions-V100
+      - .Spotlight-V100
+      - .Trash-*
+      - .fseventsd
+      - .stfolder
+      - 3dboxes
+      - '@eaDir'
+      - System Volume Information
+      - __MACOSX
+      - backcovers
+      - covers
+      - downloaded_media
+      - fanart
+      - manuals
+      - marquees
+      - media
+      - miximages
+      - physicalmedia
+      - screenshots
+      - titlescreens
+      - videos
+      parts:
+        extensions:
+        - bak
+        - cache
+        - crdownload
+        - db
+        - ini
+        - lock
+        - log
+        - part
+        - tmp
+        - txt
+        - xml
+        names:
+        - .DS_Store
+        - .Trashes
+        - ._*
+        - .localized
+        - .stfolder
+        - '@SynoResource'
+        - data.xml
+        - gamelist.xml
+        - metadata.pegasus.xml
+    single_file:
+      extensions:
+      - bak
+      - cache
+      - crdownload
+      - db
+      - ini
+      - lock
+      - log
+      - part
+      - tmp
+      - txt
+      - xml
+      names:
+      - '*.nfo'
+      - .DS_Store
+      - .Trashes
+      - ._*
+      - .localized
+      - .stfolder
+      - '@SynoResource'
+      - gamelist.xml
+      - info.txt
+      - metadata.pegasus.xml
+      - This is the 3DS directory with the decoded 3ds files
+filesystem:
+  firmware_folder: bios
+  roms_folder: roms
+scan:
+  export_gamelist: false
+  media:
+  - box3d
+  - box2d
+  - miximage
+  - physical
+  - screenshot
+  - title_screen
+  - box2d_back
+  - logo
+  priority:
+    artwork:
+    - igdb
+    - moby
+    - ss
+    - ra
+    - launchbox
+    - gamelist
+    - hasheous
+    - tgdb
+    - flashpoint
+    - hltb
+    language:
+    - en
+    - fr
+    metadata:
+    - igdb
+    - moby
+    - ss
+    - ra
+    - launchbox
+    - gamelist
+    - hasheous
+    - tgdb
+    - flashpoint
+    - hltb
+    region:
+    - us
+    - wor
+    - ss
+    - eu
+    - jp
+system:
+  platforms: {}
+  versions: {}
