@@ -8,9 +8,9 @@ services:
       - PGID=1000 # Run 'id' in your terminal to get your GID
       - TZ=America/Chicago
     volumes:
-      - ~/docker/arrs/config/prowlarr:/config
+      - ./config/prowlarr:/config
       # Mount your custom tracker YMLs here
-      - ~/docker/arrs/config/trackers:/config/Definitions/Custom:ro
+      - ./config/trackers:/config/Definitions/Custom:ro
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -26,10 +26,8 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - ~/docker/arrs/config/radarr:/config
+      - ./config/radarr:/config
       - /mnt/storage_5tb:/mnt/storage_5tb # files downloaded to download/ and plex reads at /movie
-      - /mnt/storage_5tb/movie:/movie # Point to your movie storage, legacy (remove later)
-      - /mnt/storage_5tb/download:/download # Point to your torrent download folder, legacy (remove later)
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -45,10 +43,8 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - ~/docker/arrs/config/sonarr:/config
+      - ./config/sonarr:/config
       - /mnt/storage_5tb:/mnt/storage_5tb # files downloaded to download/ and plex reads at /tv
-      - /mnt/storage_5tb/tv:/tv # Point to your TV storage, legacy (remove later)
-      - /mnt/storage_5tb/download:/download # Point to your torrent download folder, legacy (remove later)
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -64,9 +60,9 @@ services:
       - "2468:2468"
     volumes:
       # Appdata configuration directory for cross-seed
-      - ~/docker/arrs/config/cross-seed:/config
+      - ./config/cross-seed:/config
       # qBittorrent torrent state backup directory
-      - ~/docker/qbittorrent/config/qBittorrent/BT_backup:/torrents:ro
+      - ./../qbittorrent/config/qBittorrent/BT_backup:/torrents:ro
       # Storage mounts (identical to your host/qBittorrent setup)
       - /mnt/storage_5tb:/mnt/storage_5tb
       - /mnt/storage_3tb:/mnt/storage_3tb
