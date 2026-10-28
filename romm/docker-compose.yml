@@ -17,8 +17,8 @@ services:
       - romm_resources:/romm/resources # Resources fetched from IGDB (covers, screenshots, etc.)
       - romm_redis_data:/redis-data # Cached data for background tasks
       - /mnt/storage_3tb/Emulation:/romm/library # Your game library. Check https://docs.romm.app/latest/Getting-Started/Folder-Structure/ for more details.
-      - /home/julie/docker/romm/assets:/romm/assets # Uploaded saves, states, etc.
-      - /home/julie/docker/romm/config:/romm/config # (Optional) Path where config.yml is stored
+      - ./assets:/romm/assets # Uploaded saves, states, etc.
+      - ./config:/romm/config # (Optional) Path where config.yml is stored
     ports:
       - 8081:8080
     depends_on:
